@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2020-03-17T10:08:07.689328800Z</date>
+  <millis>1584439687689</millis>
+  <nanos>328800</nanos>
+  <sequence>0</sequence>
+  <logger>seedu.duke.Duke</logger>
+  <level>WARNING</level>
+  <class>seedu.duke.Duke</class>
+  <method>run</method>
+  <thread>1</thread>
+  <message>DukeException at main()</message>
+</record>
