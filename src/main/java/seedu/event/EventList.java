@@ -48,13 +48,16 @@ public class EventList {
      * @param index the index of the element to be removed
      * @return the removed event
      */
-    public Event delete(int index) throws DukeException {
+    public void delete(int index) throws DukeException {
         if (index >= list.size()) {
             throw new DukeException("Index not found.");
         }
-        UI.deleteEventMessage("Event", list.get(index).getName());
-        Event removedEvent = list.remove(index);
-        return removedEvent;
+        if (list.get(index) instanceof Seminar){
+            UI.deleteEventMessage("Seminar", list.get(index).getName());
+        } else {
+            UI.deleteEventMessage("Event", list.get(index).getName());
+        }
+        list.remove(index);
     }
 
     /**
