@@ -116,7 +116,7 @@ public class UI {
         printSplitContent();
     }
 
-    public static void printEventList(ArrayList <Event> list){
+    public static void printEventList(ArrayList <Event> list) {
         System.out.println("Here are all the events in your list.");
         for (int i = 0; i < list.size(); i++) {
             System.out.println(i + 1 + ". " +  list.get(i));
@@ -136,9 +136,19 @@ public class UI {
     }
 
     public static void editEventNameMessage(String oldName, String newName, String eventType) {
-        System.out.printf("Your %s name was changed from %s to %s.\n",
+        System.out.printf("Your %s name was changed from |%s| to |%s|.\n",
                 eventType, oldName, newName );
 
+    }
+
+    public static void editEventDateTimeMessage(String oldDateTime, String newDateTime, String eventType) {
+        System.out.printf("Your %s date and time was changed from |%s| to |%s|.\n",
+                eventType, oldDateTime, newDateTime);
+    }
+
+    public static void editEventVenueMessage(String oldVenue, String newVenue, String eventType) {
+        System.out.printf("Your %s venue was changed from |%s| to |%s|.\n",
+                eventType, oldVenue, newVenue);
     }
 
     public static void addEventMessage(String eventType, String eventName) {

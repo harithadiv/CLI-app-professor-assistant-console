@@ -82,7 +82,7 @@ public class EventList {
         if (event instanceof Seminar) {
             UI.editEventNameMessage(event.getName(), name, "Seminar");
         } else {
-            UI.editEventNameMessage(event.getName(), name, "Event:");
+            UI.editEventNameMessage(event.getName(), name, "Event");
         }
         event.setName(name);
     }
@@ -94,6 +94,11 @@ public class EventList {
      */
     public void editDatetime(int index, String datetime) throws DukeException {
         Event event = this.find(index);
+        if (event instanceof Seminar) {
+            UI.editEventDateTimeMessage(event.getDatetime(), datetime, "Seminar");
+        } else {
+            UI.editEventDateTimeMessage(event.getDatetime(), datetime, "Event");
+        }
         event.setDatetime(datetime);
     }
 
@@ -104,9 +109,22 @@ public class EventList {
      */
     public void editVenue(int index, String venue) throws DukeException {
         Event event = this.find(index);
+        if (event instanceof Seminar) {
+            UI.editEventVenueMessage(event.getVenue(), venue, "Seminar");
+        } else {
+            UI.editEventVenueMessage(event.getVenue(), venue, "Event");
+        }
         event.setVenue(venue);
     }
 
+    /**
+     * Edits all the fields in the event, ie. name, date and time, venue,
+     * essentially replacing the only event with the new event
+     *
+     * @param index Index of the event to be edited.
+     * @param event New event that user inputs.
+     * @throws DukeException
+     */
     public void editEvent(int index, Event event) throws DukeException {
         if (index >= list.size()) {
             throw new DukeException("Index not found.");
@@ -124,6 +142,11 @@ public class EventList {
         return list.size();
     }
 
+    /**
+     * Lists all types of events.
+     *
+     * @throws DukeException If list is empty.
+     */
     public void listEvent() throws DukeException {
         if (list.size() == 0) {
             throw new DukeException("List is empty");
@@ -131,6 +154,11 @@ public class EventList {
         UI.printEventList(list);
     }
 
+    /**
+     * Lists out events that are of seminar type only.
+     *
+     * @throws DukeException If list is empty.
+     */
     public void listSeminar() throws DukeException {
         if (list.size() == 0){
             throw new DukeException("List is empty");

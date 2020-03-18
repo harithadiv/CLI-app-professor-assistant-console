@@ -86,3 +86,30 @@
   <thread>1</thread>
   <message>DukeException at main()</message>
 </record>
+<?xml version="1.0" encoding="windows-1252" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2020-03-18T14:21:48.536793100Z</date>
+  <millis>1584541308536</millis>
+  <nanos>793100</nanos>
+  <sequence>0</sequence>
+  <logger>seedu.duke.Duke</logger>
+  <level>WARNING</level>
+  <class>seedu.duke.Duke</class>
+  <method>run</method>
+  <thread>1</thread>
+  <message>DukeException at main()</message>
+</record>
+<record>
+  <date>2020-03-18T14:22:42.580225300Z</date>
+  <millis>1584541362580</millis>
+  <nanos>225300</nanos>
+  <sequence>1</sequence>
+  <logger>seedu.duke.Duke</logger>
+  <level>WARNING</level>
+  <class>seedu.duke.Duke</class>
+  <method>run</method>
+  <thread>1</thread>
+  <message>DukeException at main()</message>
+</record>
