@@ -12,7 +12,8 @@ public class AddEvent extends Command {
         this.newEvent = newEvent;
         this.eventList = eventList;
     }
-    public AddEvent(EventList eventList){
+
+    public AddEvent(EventList eventList) {
         this.eventList = eventList;
     }
 

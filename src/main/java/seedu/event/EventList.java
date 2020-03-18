@@ -3,9 +3,8 @@ package seedu.event;
 import seedu.exception.DukeException;
 import seedu.ui.UI;
 
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class EventList {
     public ArrayList<Event> list;
@@ -45,14 +44,14 @@ public class EventList {
     /**
      * Removes the event at the specified position in this list.
      * Shifts any subsequent events to the left (subtracts one from their indices).
+     *
      * @param index the index of the element to be removed
-     * @return the removed event
      */
     public void delete(int index) throws DukeException {
         if (index >= list.size()) {
             throw new DukeException("Index not found.");
         }
-        if (list.get(index) instanceof Seminar){
+        if (list.get(index) instanceof Seminar) {
             UI.deleteEventMessage("Seminar", list.get(index).getName());
         } else {
             UI.deleteEventMessage("Event", list.get(index).getName());
@@ -62,8 +61,9 @@ public class EventList {
 
     /**
      * Returns the event at the specified position in this list.
-     * @param index index of the event to find
-     * @return the event in the specified position
+     * @param index index of the event to find.
+     * @return the event in the specified position.
+     * @throws DukeException If list is empty.
      */
     public Event find(int index) throws DukeException {
         if (index >= list.size()) {
@@ -118,12 +118,11 @@ public class EventList {
     }
 
     /**
-     * Edits all the fields in the event, ie. name, date and time, venue,
-     * essentially replacing the only event with the new event
+     * Edits all the fields in the event, ie. name, date and time, venue.
      *
      * @param index Index of the event to be edited.
      * @param event New event that user inputs.
-     * @throws DukeException
+     * @throws DukeException If list is empty.
      */
     public void editEvent(int index, Event event) throws DukeException {
         if (index >= list.size()) {
@@ -160,12 +159,12 @@ public class EventList {
      * @throws DukeException If list is empty.
      */
     public void listSeminar() throws DukeException {
-        if (list.size() == 0){
+        if (list.size() == 0) {
             throw new DukeException("List is empty");
         }
         ArrayList<Event> seminarList = new ArrayList<>();
         for (Event item : list) {
-            if (item instanceof Seminar){
+            if (item instanceof Seminar) {
                 seminarList.add(item);
             }
         }

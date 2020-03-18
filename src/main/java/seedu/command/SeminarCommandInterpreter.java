@@ -1,10 +1,15 @@
 package seedu.command;
 
-//import seedu.command.event.*;
-import seedu.command.event.*;
+
+import seedu.command.event.EditDateTime;
+import seedu.command.event.EditName;
+import seedu.command.event.ListSeminar;
+import seedu.command.event.AddEvent;
+import seedu.command.event.EditVenue;
+import seedu.command.event.EditEvent;
+import seedu.command.event.DeleteEvent;
 import seedu.event.Seminar;
 import seedu.exception.DukeException;
-import seedu.event.Event;
 import seedu.event.EventList;
 import seedu.parser.EventParser;
 
@@ -58,7 +63,7 @@ public class SeminarCommandInterpreter extends CommandInterpreter {
             index = eventParser.parseIndex(commandParameters);
             command = new DeleteEvent(index, this.eventList);
             break;
-        case "view":
+        case "list":
             command = new ListSeminar(this.eventList);
             break;
         default:
