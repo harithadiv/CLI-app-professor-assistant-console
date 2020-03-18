@@ -130,29 +130,18 @@ public class UI {
         }
     }
 
-    public static void editEventMessage(Event oldEvent, Event newEvent) {
-        System.out.println("Your event was edited from |" + oldEvent.toString() + "| to |" + newEvent.toString() + "|");
+    public static void editEventMessage(String oldEvent, String newEvent, String eventType) {
+        System.out.printf("Your %s was edited from |%s| to |%s|.\n",
+                eventType, oldEvent, newEvent);
     }
 
-    public static void editSeminarMessage(Event oldEvent, Event newEvent) {
-        System.out.println("Your seminar was edited from |" + oldEvent.toString() + "| to |" + newEvent.toString() + "|");
-    }
+    public static void editEventNameMessage(String oldName, String newName, String eventType) {
+        System.out.printf("Your %s name was changed from %s to %s.\n",
+                eventType, oldName, newName );
 
-    public static void editEventNameMessage(String oldName, String newName) {
-        System.out.println("Your event name was changed from " + oldName + " to " + newName);
     }
-
-    public static void editSeminarNameMessage(String oldName, String newName) {
-        System.out.println("Your seminar name was changed from |" + oldName + "| to |" + newName + "|");
-    }
-
 
     public static void addEventMessage(String eventType, String eventName) {
-        System.out.printf("New %s: %s was added successfully to "
-                + "your Event list.\n", eventType, eventName);
-    }
-
-    public static void addSeminarMessage(String eventType, String eventName) {
         System.out.printf("New %s: %s was added successfully to "
                 + "your Event list.\n", eventType, eventName);
     }
@@ -172,10 +161,6 @@ public class UI {
                 + "your Event list.\n", eventType, eventName);
     }
 
-    public static void deleteSeminarMessage(String eventType, String eventName) {
-        System.out.printf("%s: %s was deleted successfully from "
-                + "your Seminar list.\n", eventType, eventName);
-    }
 
     /**
      * The message showed to the user after successful deletion of a attendance.

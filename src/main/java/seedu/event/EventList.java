@@ -24,7 +24,7 @@ public class EventList {
     public void add(Event event) {
         list.add(event);
         if (event instanceof Seminar) {
-            UI.addSeminarMessage("Seminar", event.getName());
+            UI.addEventMessage("Seminar", event.getName());
         } else {
             UI.addEventMessage("Event", event.getName());
         }
@@ -80,9 +80,9 @@ public class EventList {
     public void editName(int index, String name) throws DukeException {
         Event event = this.find(index);
         if (event instanceof Seminar) {
-            UI.editSeminarNameMessage(event.getName(), name);
+            UI.editEventNameMessage(event.getName(), name, "Seminar");
         } else {
-            UI.editEventNameMessage(event.getName(), name);
+            UI.editEventNameMessage(event.getName(), name, "Event:");
         }
         event.setName(name);
     }
@@ -112,9 +112,9 @@ public class EventList {
             throw new DukeException("Index not found.");
         }
         if (event instanceof Seminar) {
-            UI.editSeminarMessage(list.get(index), event);
+            UI.editEventMessage(list.get(index).toString(), event.toString(), "Seminar");
         } else {
-            UI.editEventMessage(list.get(index), event);
+            UI.editEventMessage(list.get(index).toString(), event.toString(), "Event");
         }
         list.remove(index);
         list.add(index, event);
