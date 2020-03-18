@@ -5,6 +5,7 @@ import seedu.event.Event;
 import seedu.performance.Performance;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
@@ -115,7 +116,43 @@ public class UI {
         printSplitContent();
     }
 
+    public static void printEventList(ArrayList <Event> list){
+        System.out.println("Here are all the events in your list.");
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(i + 1 + ". " +  list.get(i));
+        }
+    }
+
+    public static void printSeminarList(ArrayList<Event> list) {
+        System.out.println("Here are all the seminar events in your list.");
+        for (int i = 0; i < list.size(); i++){
+            System.out.println(i + 1 + ". " +  list.get(i));
+        }
+    }
+
+    public static void editEventMessage(Event oldEvent, Event newEvent) {
+        System.out.println("Your event was edited from |" + oldEvent.toString() + "| to |" + newEvent.toString() + "|");
+    }
+
+    public static void editSeminarMessage(Event oldEvent, Event newEvent) {
+        System.out.println("Your seminar was edited from |" + oldEvent.toString() + "| to |" + newEvent.toString() + "|");
+    }
+
+    public static void editEventNameMessage(String oldName, String newName) {
+        System.out.println("Your event name was changed from " + oldName + " to " + newName);
+    }
+
+    public static void editSeminarNameMessage(String oldName, String newName) {
+        System.out.println("Your seminar name was changed from |" + oldName + "| to |" + newName + "|");
+    }
+
+
     public static void addEventMessage(String eventType, String eventName) {
+        System.out.printf("New %s: %s was added successfully to "
+                + "your Event list.\n", eventType, eventName);
+    }
+
+    public static void addSeminarMessage(String eventType, String eventName) {
         System.out.printf("New %s: %s was added successfully to "
                 + "your Event list.\n", eventType, eventName);
     }
@@ -133,6 +170,11 @@ public class UI {
     public static void deleteEventMessage(String eventType, String eventName) {
         System.out.printf("%s: %s was deleted successfully from "
                 + "your Event list.\n", eventType, eventName);
+    }
+
+    public static void deleteSeminarMessage(String eventType, String eventName) {
+        System.out.printf("%s: %s was deleted successfully from "
+                + "your Seminar list.\n", eventType, eventName);
     }
 
     /**

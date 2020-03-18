@@ -3,7 +3,9 @@ package seedu.event;
 import seedu.exception.DukeException;
 import seedu.ui.UI;
 
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EventList {
     public ArrayList<Event> list;
@@ -21,7 +23,11 @@ public class EventList {
      */
     public void add(Event event) {
         list.add(event);
-        UI.addEventMessage("Event", event.getName());
+        if (event instanceof Seminar) {
+            UI.addSeminarMessage("Seminar", event.getName());
+        } else {
+            UI.addEventMessage("Event", event.getName());
+        }
     }
 
     /**
@@ -64,6 +70,11 @@ public class EventList {
      */
     public void editName(int index, String name) throws DukeException {
         Event event = this.find(index);
+        if (event instanceof Seminar) {
+            UI.editSeminarNameMessage(event.getName(), name);
+        } else {
+            UI.editEventNameMessage(event.getName(), name);
+        }
         event.setName(name);
     }
 
@@ -87,7 +98,15 @@ public class EventList {
         event.setVenue(venue);
     }
 
-    public void editEvent(int index, Event event) {
+    public void editEvent(int index, Event event) throws DukeException {
+        if (index >= list.size()) {
+            throw new DukeException("Index not found.");
+        }
+        if (event instanceof Seminar) {
+            UI.editSeminarMessage(list.get(index), event);
+        } else {
+            UI.editEventMessage(list.get(index), event);
+        }
         list.remove(index);
         list.add(index, event);
     }
@@ -96,4 +115,23 @@ public class EventList {
         return list.size();
     }
 
+    public void listEvent() throws DukeException {
+        if (list.size() == 0) {
+            throw new DukeException("List is empty");
+        }
+        UI.printEventList(list);
+    }
+
+    public void listSeminar() throws DukeException {
+        if (list.size() == 0){
+            throw new DukeException("List is empty");
+        }
+        ArrayList<Event> seminarList = new ArrayList<>();
+        for (Event item : list) {
+            if (item instanceof Seminar){
+                seminarList.add(item);
+            }
+        }
+        UI.printSeminarList(seminarList);
+    }
 }

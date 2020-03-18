@@ -8,6 +8,7 @@ import seedu.command.event.EditVenue;
 import seedu.command.event.EditEvent;
 import seedu.command.event.DeleteEvent;
 import seedu.command.event.ListEvent;
+import seedu.event.Seminar;
 import seedu.exception.DukeException;
 import seedu.event.Event;
 import seedu.event.EventList;
