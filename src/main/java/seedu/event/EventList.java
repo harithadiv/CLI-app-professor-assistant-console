@@ -48,7 +48,10 @@ public class EventList {
      * @param index the index of the element to be removed
      * @return the removed event
      */
-    public Event delete(int index) {
+    public Event delete(int index) throws DukeException {
+        if (index >= list.size()) {
+            throw new DukeException("Index not found.");
+        }
         UI.deleteEventMessage("Event", list.get(index).getName());
         Event removedEvent = list.remove(index);
         return removedEvent;
@@ -59,7 +62,10 @@ public class EventList {
      * @param index index of the event to find
      * @return the event in the specified position
      */
-    public Event find(int index) {
+    public Event find(int index) throws DukeException {
+        if (index >= list.size()) {
+            throw new DukeException("Index not found.");
+        }
         return list.get(index);
     }
 
@@ -83,7 +89,7 @@ public class EventList {
      * @param index index of the event
      * @param datetime new datetime for the event
      */
-    public void editDatetime(int index, String datetime) {
+    public void editDatetime(int index, String datetime) throws DukeException {
         Event event = this.find(index);
         event.setDatetime(datetime);
     }
@@ -93,7 +99,7 @@ public class EventList {
      * @param index index of the event
      * @param venue new venue for the event
      */
-    public void editVenue(int index, String venue) {
+    public void editVenue(int index, String venue) throws DukeException {
         Event event = this.find(index);
         event.setVenue(venue);
     }
