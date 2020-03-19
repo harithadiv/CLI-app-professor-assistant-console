@@ -20,4 +20,4 @@ bin/
 *.log
 *.lck
 
-/text-ui-test/ACTUAL.txt
+/text-ui-test/ACTUAL.txtdebug.log 
