@@ -2,22 +2,23 @@ package seedu.command.event;
 
 import seedu.command.Command;
 import seedu.event.Event;
-import seedu.event.EventList;
+import seedu.event.Task;
+import seedu.event.TaskList;
 import seedu.exception.DukeException;
 
 public class EditEvent extends Command {
     private Integer index;
-    private Event newEvent;
-    private EventList eventList;
+    private Task newTask;
+    private TaskList taskList;
 
-    public EditEvent(Integer index, Event newEvent, EventList eventList) {
+    public EditEvent(Integer index, Task newTask, TaskList taskList) {
         this.index = index - 1;
-        this.newEvent = newEvent;
-        this.eventList = eventList;
+        this.newTask = newTask;
+        this.taskList = taskList;
     }
 
     @Override
     public void execute() throws DukeException {
-        eventList.editEvent(index, newEvent);
+        taskList.editEvent(index, newTask);
     }
 }

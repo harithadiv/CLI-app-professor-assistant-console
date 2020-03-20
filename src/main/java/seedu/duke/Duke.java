@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 import seedu.command.Bye;
 import seedu.command.CommandInterpreter;
 import seedu.command.Command;
-import seedu.event.EventList;
+import seedu.event.TaskList;
 import seedu.ui.UI;
 import seedu.exception.DukeException;
 
@@ -18,15 +18,15 @@ public class Duke {
 
     protected UI ui;
     protected CommandInterpreter interpreter;
-    protected EventList eventList;
+    protected TaskList taskList;
 
     public Duke() {
         setupLogger();
 
         ui = new UI();
-        eventList = new EventList();  //TODO: new Storage().load()
+        taskList = new TaskList();  //TODO: new Storage().load()
 
-        interpreter = new CommandInterpreter(eventList);
+        interpreter = new CommandInterpreter(taskList);
     }
 
     private void setupLogger() {

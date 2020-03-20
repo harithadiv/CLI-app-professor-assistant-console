@@ -2,18 +2,19 @@ package seedu.command.event;
 
 import seedu.command.Command;
 import seedu.event.Event;
-import seedu.event.EventList;
+import seedu.event.Task;
+import seedu.event.TaskList;
 import seedu.exception.DukeException;
 
 public class ListEvent extends Command {
-    private EventList eventList;
+    private TaskList taskList;
 
-    public ListEvent(EventList eventList) {
-        this.eventList = eventList;
+    public ListEvent(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     @Override
     public void execute() throws DukeException {
-        eventList.listEvent();
+        taskList.listEvent();
     }
 }

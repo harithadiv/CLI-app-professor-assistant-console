@@ -6,26 +6,26 @@ import seedu.ui.UI;
 import java.util.ArrayList;
 
 
-public class EventList {
-    public ArrayList<Event> list;
+public class TaskList {
+    public ArrayList<Task> list;
 
     /**
      * Empty constructor. Creates an empty list.
      */
-    public EventList() {
+    public TaskList() {
         this.list = new ArrayList<>();
     }
 
     /**
      * Add the specified event to the end of list.
-     * @param event the event to be appended
+     * @param task the task to be appended
      */
-    public void add(Event event) {
-        list.add(event);
-        if (event instanceof Seminar) {
-            UI.addEventMessage("Seminar", event.getName());
+    public void add(Task task) {
+        list.add(task);
+        if (task instanceof Seminar) {
+            UI.addEventMessage("Seminar", task.getName());
         } else {
-            UI.addEventMessage("Event", event.getName());
+            UI.addEventMessage("Event", task.getName());
         }
     }
 
@@ -33,12 +33,12 @@ public class EventList {
      * Delete the first instance of the specified event in the list.
      * Returns {@code true} if the specified event is found (and removed)
      * from the list.
-     * @param event the event to be deleted
+     * @param task the task to be deleted
      * @return {@code true} if the specified event is found (and removed)
      *      from the list
      */
-    public boolean delete(Event event) {
-        return list.remove(event);
+    public boolean delete(Task task) {
+        return list.remove(task);
     }
 
     /**
@@ -48,7 +48,9 @@ public class EventList {
      * @param index the index of the element to be removed
      */
     public void delete(int index) throws DukeException {
-        if (index >= list.size()) {
+        if (list.size() == 0) {
+            throw new DukeException("List is empty, unable to delete any items.");
+        } else if (index >= list.size()) {
             throw new DukeException("Index not found.");
         }
         if (list.get(index) instanceof Seminar) {
@@ -65,7 +67,7 @@ public class EventList {
      * @return the event in the specified position.
      * @throws DukeException If list is empty.
      */
-    public Event find(int index) throws DukeException {
+    public Task find(int index) throws DukeException {
         if (index >= list.size()) {
             throw new DukeException("Index not found.");
         }
@@ -78,13 +80,13 @@ public class EventList {
      * @param name new name for the event
      */
     public void editName(int index, String name) throws DukeException {
-        Event event = this.find(index);
-        if (event instanceof Seminar) {
-            UI.editEventNameMessage(event.getName(), name, "Seminar");
+        Task task = this.find(index);
+        if (task instanceof Seminar) {
+            UI.editEventNameMessage(task.getName(), name, "Seminar");
         } else {
-            UI.editEventNameMessage(event.getName(), name, "Event");
+            UI.editEventNameMessage(task.getName(), name, "Event");
         }
-        event.setName(name);
+        task.setName(name);
     }
 
     /**
@@ -93,13 +95,13 @@ public class EventList {
      * @param datetime new datetime for the event
      */
     public void editDatetime(int index, String datetime) throws DukeException {
-        Event event = this.find(index);
-        if (event instanceof Seminar) {
-            UI.editEventDateTimeMessage(event.getDatetime(), datetime, "Seminar");
+        Task task = this.find(index);
+        if (task instanceof Seminar) {
+            UI.editEventDateTimeMessage(task.getDatetime(), datetime, "Seminar");
         } else {
-            UI.editEventDateTimeMessage(event.getDatetime(), datetime, "Event");
+            UI.editEventDateTimeMessage(task.getDatetime(), datetime, "Event");
         }
-        event.setDatetime(datetime);
+        task.setDatetime(datetime);
     }
 
     /**
@@ -108,33 +110,33 @@ public class EventList {
      * @param venue new venue for the event
      */
     public void editVenue(int index, String venue) throws DukeException {
-        Event event = this.find(index);
-        if (event instanceof Seminar) {
-            UI.editEventVenueMessage(event.getVenue(), venue, "Seminar");
+        Task task = this.find(index);
+        if (task instanceof Seminar) {
+            UI.editEventVenueMessage(task.getVenue(), venue, "Seminar");
         } else {
-            UI.editEventVenueMessage(event.getVenue(), venue, "Event");
+            UI.editEventVenueMessage(task.getVenue(), venue, "Event");
         }
-        event.setVenue(venue);
+        task.setVenue(venue);
     }
 
     /**
      * Edits all the fields in the event, ie. name, date and time, venue.
      *
      * @param index Index of the event to be edited.
-     * @param event New event that user inputs.
+     * @param task New task that user inputs.
      * @throws DukeException If list is empty.
      */
-    public void editEvent(int index, Event event) throws DukeException {
+    public void editEvent(int index, Task task) throws DukeException {
         if (index >= list.size()) {
             throw new DukeException("Index not found.");
         }
-        if (event instanceof Seminar) {
-            UI.editEventMessage(list.get(index).toString(), event.toString(), "Seminar");
+        if (task instanceof Seminar) {
+            UI.editEventMessage(list.get(index).toString(), task.toString(), "Seminar");
         } else {
-            UI.editEventMessage(list.get(index).toString(), event.toString(), "Event");
+            UI.editEventMessage(list.get(index).toString(), task.toString(), "Event");
         }
         list.remove(index);
-        list.add(index, event);
+        list.add(index, task);
     }
 
     public int getSize() {
@@ -162,10 +164,10 @@ public class EventList {
         if (list.size() == 0) {
             throw new DukeException("List is empty");
         }
-        ArrayList<Event> seminarList = new ArrayList<>();
-        for (Event item : list) {
-            if (item instanceof Seminar) {
-                seminarList.add(item);
+        ArrayList<Task> seminarList = new ArrayList<>();
+        for (Task task : list) {
+            if (task instanceof Seminar) {
+                seminarList.add(task);
             }
         }
         UI.printSeminarList(seminarList);

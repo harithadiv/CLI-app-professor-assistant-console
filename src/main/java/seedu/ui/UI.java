@@ -2,6 +2,7 @@ package seedu.ui;
 
 import seedu.attendance.Attendance;
 import seedu.event.Event;
+import seedu.event.Task;
 import seedu.performance.Performance;
 
 import java.io.Serializable;
@@ -116,14 +117,14 @@ public class UI {
         printSplitContent();
     }
 
-    public static void printEventList(ArrayList<Event> list) {
+    public static void printEventList(ArrayList<Task> list) {
         System.out.println("Here are all the events in your list.");
         for (int i = 0; i < list.size(); i++) {
             System.out.println(i + 1 + ". " +  list.get(i));
         }
     }
 
-    public static void printSeminarList(ArrayList<Event> list) {
+    public static void printSeminarList(ArrayList<Task> list) {
         System.out.println("Here are all the seminar events in your list.");
         for (int i = 0; i < list.size(); i++) {
             System.out.println(i + 1 + ". " +  list.get(i));

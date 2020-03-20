@@ -1,13 +1,13 @@
 package seedu.command;
 
-import seedu.event.EventList;
+import seedu.event.TaskList;
 import seedu.exception.DukeException;
 
 public class CommandInterpreter {
-    protected EventList eventList;
+    protected TaskList taskList;
 
-    public CommandInterpreter(EventList eventList) {
-        this.eventList = eventList;
+    public CommandInterpreter(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     /**
@@ -60,19 +60,19 @@ public class CommandInterpreter {
             command = new Bye();
             break;
         case "event":
-            EventCommandInterpreter eci = new EventCommandInterpreter(eventList);
+            EventCommandInterpreter eci = new EventCommandInterpreter(taskList);
             command = eci.decideCommand(commandDescription);
             break;
         case "seminar":
-            SeminarCommandInterpreter sci = new SeminarCommandInterpreter(eventList);
+            SeminarCommandInterpreter sci = new SeminarCommandInterpreter(taskList);
             command = sci.decideCommand(commandDescription);
             break;
         case "attendance":
-            AttendanceCommandInterpreter aci = new AttendanceCommandInterpreter(eventList);
+            AttendanceCommandInterpreter aci = new AttendanceCommandInterpreter(taskList);
             command = aci.decideCommand(commandDescription);
             break;
         case "performance":
-            PerformanceCommandInterpreter pci = new PerformanceCommandInterpreter(eventList);
+            PerformanceCommandInterpreter pci = new PerformanceCommandInterpreter(taskList);
             command = pci.decideCommand(commandDescription);
             break;
         default:

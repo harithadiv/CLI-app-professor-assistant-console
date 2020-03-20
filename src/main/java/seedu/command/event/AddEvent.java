@@ -2,24 +2,25 @@ package seedu.command.event;
 
 import seedu.command.Command;
 import seedu.event.Event;
-import seedu.event.EventList;
+import seedu.event.Task;
+import seedu.event.TaskList;
 
 public class AddEvent extends Command {
-    private Event newEvent;
-    private EventList eventList;
+    private Task newTask;
+    private TaskList taskList;
 
-    public AddEvent(Event newEvent, EventList eventList) {
-        this.newEvent = newEvent;
-        this.eventList = eventList;
+    public AddEvent(Task newTask, TaskList taskList) {
+        this.newTask = newTask;
+        this.taskList = taskList;
     }
 
-    public AddEvent(EventList eventList) {
-        this.eventList = eventList;
+    public AddEvent(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     @Override
     public void execute() {
-        eventList.add(newEvent);
+        taskList.add(newTask);
     }
 
 

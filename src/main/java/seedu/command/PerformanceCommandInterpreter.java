@@ -4,13 +4,13 @@ import seedu.command.performance.AddPerformance;
 import seedu.command.performance.DeletePerformance;
 import seedu.command.performance.ViewAssignmentResult;
 import seedu.command.performance.ViewStudentResult;
-import seedu.event.EventList;
+import seedu.event.TaskList;
 import seedu.exception.DukeException;
 
 
 public class PerformanceCommandInterpreter extends CommandInterpreter {
-    public PerformanceCommandInterpreter(EventList eventList) {
-        super(eventList);
+    public PerformanceCommandInterpreter(TaskList taskList) {
+        super(taskList);
     }
 
     /**

@@ -2,7 +2,7 @@ package seedu.command;
 
 import seedu.command.attendance.AddAttendance;
 import seedu.command.attendance.DeleteAttendance;
-import seedu.event.EventList;
+import seedu.event.TaskList;
 import seedu.exception.DukeException;
 
 import java.io.IOException;
@@ -15,8 +15,8 @@ import java.util.logging.LogManager;
 public class AttendanceCommandInterpreter extends CommandInterpreter {
     private static final Logger logger = Logger.getLogger(AttendanceCommandInterpreter.class.getName());
 
-    public AttendanceCommandInterpreter(EventList eventList) {
-        super(eventList);
+    public AttendanceCommandInterpreter(TaskList taskList) {
+        super(taskList);
     }
 
     public static void setupLogger() throws DukeException {
