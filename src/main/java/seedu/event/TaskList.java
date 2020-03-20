@@ -23,9 +23,9 @@ public class TaskList {
     public void add(Task task) {
         list.add(task);
         if (task instanceof Seminar) {
-            UI.addEventMessage("Seminar", task.getName());
+            UI.addTaskMessage("Seminar", task.getName());
         } else {
-            UI.addEventMessage("Event", task.getName());
+            UI.addTaskMessage("Event", task.getName());
         }
     }
 
@@ -54,9 +54,9 @@ public class TaskList {
             throw new DukeException("Index not found.");
         }
         if (list.get(index) instanceof Seminar) {
-            UI.deleteEventMessage("Seminar", list.get(index).getName());
+            UI.deleteTaskMessage("Seminar", list.get(index).getName());
         } else {
-            UI.deleteEventMessage("Event", list.get(index).getName());
+            UI.deleteTaskMessage("Event", list.get(index).getName());
         }
         list.remove(index);
     }
@@ -82,9 +82,9 @@ public class TaskList {
     public void editName(int index, String name) throws DukeException {
         Task task = this.find(index);
         if (task instanceof Seminar) {
-            UI.editEventNameMessage(task.getName(), name, "Seminar");
+            UI.editTaskNameMessage(task.getName(), name, "Seminar");
         } else {
-            UI.editEventNameMessage(task.getName(), name, "Event");
+            UI.editTaskNameMessage(task.getName(), name, "Event");
         }
         task.setName(name);
     }
@@ -97,9 +97,9 @@ public class TaskList {
     public void editDatetime(int index, String datetime) throws DukeException {
         Task task = this.find(index);
         if (task instanceof Seminar) {
-            UI.editEventDateTimeMessage(task.getDatetime(), datetime, "Seminar");
+            UI.editTaskDateTimeMessage(task.getDatetime(), datetime, "Seminar");
         } else {
-            UI.editEventDateTimeMessage(task.getDatetime(), datetime, "Event");
+            UI.editTaskDateTimeMessage(task.getDatetime(), datetime, "Event");
         }
         task.setDatetime(datetime);
     }
@@ -112,9 +112,9 @@ public class TaskList {
     public void editVenue(int index, String venue) throws DukeException {
         Task task = this.find(index);
         if (task instanceof Seminar) {
-            UI.editEventVenueMessage(task.getVenue(), venue, "Seminar");
+            UI.editTaskVenueMessage(task.getVenue(), venue, "Seminar");
         } else {
-            UI.editEventVenueMessage(task.getVenue(), venue, "Event");
+            UI.editTaskVenueMessage(task.getVenue(), venue, "Event");
         }
         task.setVenue(venue);
     }
@@ -131,9 +131,9 @@ public class TaskList {
             throw new DukeException("Index not found.");
         }
         if (task instanceof Seminar) {
-            UI.editEventMessage(list.get(index).toString(), task.toString(), "Seminar");
+            UI.editTaskMessage(list.get(index).toString(), task.toString(), "Seminar");
         } else {
-            UI.editEventMessage(list.get(index).toString(), task.toString(), "Event");
+            UI.editTaskMessage(list.get(index).toString(), task.toString(), "Event");
         }
         list.remove(index);
         list.add(index, task);
@@ -152,7 +152,7 @@ public class TaskList {
         if (list.size() == 0) {
             throw new DukeException("List is empty");
         }
-        UI.printEventList(list);
+        UI.printTaskList(list);
     }
 
     /**

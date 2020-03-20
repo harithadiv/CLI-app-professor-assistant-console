@@ -6,13 +6,13 @@ import seedu.event.Event;
 import seedu.event.Seminar;
 import seedu.exception.DukeException;
 
-public class EventParser {
+public class TaskParser {
     private String name;
     private String date;
     private String time;
     private String venue;
 
-    public EventParser() {
+    public TaskParser() {
         this.name = "";
         this.date = "";
         this.time = "";

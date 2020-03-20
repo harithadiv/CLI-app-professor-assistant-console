@@ -9,17 +9,16 @@ import seedu.command.event.EditVenue;
 import seedu.command.event.EditEvent;
 import seedu.command.event.DeleteEvent;
 import seedu.event.Seminar;
-import seedu.event.Task;
 import seedu.exception.DukeException;
 import seedu.event.TaskList;
-import seedu.parser.EventParser;
+import seedu.parser.TaskParser;
 
 public class SeminarCommandInterpreter extends CommandInterpreter {
-    protected EventParser eventParser;
+    protected TaskParser taskParser;
 
     public SeminarCommandInterpreter(TaskList taskList) {
         super(taskList);
-        this.eventParser = new EventParser();
+        this.taskParser = new TaskParser();
     }
 
     @Override
@@ -37,31 +36,31 @@ public class SeminarCommandInterpreter extends CommandInterpreter {
         assert commandType == " " : "Event: Command is null";
         switch (commandType) {
         case "add":
-            seminar = eventParser.parseSeminar(commandParameters);
+            seminar = taskParser.parseSeminar(commandParameters);
             command = new AddEvent(seminar, this.taskList);
             break;
         case "editname":
-            index = eventParser.parseIndex(commandParameters);
-            name = eventParser.parseEventName(commandParameters);
+            index = taskParser.parseIndex(commandParameters);
+            name = taskParser.parseEventName(commandParameters);
             command = new EditName(index, name, this.taskList);
             break;
         case "editdatetime":
-            index = eventParser.parseIndex(commandParameters);
-            datetime = eventParser.parseEventDateTime(commandParameters);
+            index = taskParser.parseIndex(commandParameters);
+            datetime = taskParser.parseEventDateTime(commandParameters);
             command = new EditDateTime(index, datetime, this.taskList);
             break;
         case "editvenue":
-            index = eventParser.parseIndex(commandParameters);
-            venue = eventParser.parseVenue(commandParameters);
+            index = taskParser.parseIndex(commandParameters);
+            venue = taskParser.parseVenue(commandParameters);
             command = new EditVenue(index, venue, this.taskList);
             break;
         case "editevent":
-            index = eventParser.parseIndex(commandParameters);
-            seminar = eventParser.parseSeminar(commandParameters);
+            index = taskParser.parseIndex(commandParameters);
+            seminar = taskParser.parseSeminar(commandParameters);
             command = new EditEvent(index, seminar, this.taskList);
             break;
         case "delete":
-            index = eventParser.parseIndex(commandParameters);
+            index = taskParser.parseIndex(commandParameters);
             command = new DeleteEvent(index, this.taskList);
             break;
         case "list":

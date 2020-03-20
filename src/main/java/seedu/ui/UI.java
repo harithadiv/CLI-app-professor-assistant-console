@@ -117,8 +117,8 @@ public class UI {
         printSplitContent();
     }
 
-    public static void printEventList(ArrayList<Task> list) {
-        System.out.println("Here are all the events in your list.");
+    public static void printTaskList(ArrayList<Task> list) {
+        System.out.println("Here are all the tasks in your list.");
         for (int i = 0; i < list.size(); i++) {
             System.out.println(i + 1 + ". " +  list.get(i));
         }
@@ -131,30 +131,30 @@ public class UI {
         }
     }
 
-    public static void editEventMessage(String oldEvent, String newEvent, String eventType) {
+    public static void editTaskMessage(String oldTask, String newTask, String taskType) {
         System.out.printf("Your %s was edited from |%s| to |%s|.\n",
-                eventType, oldEvent, newEvent);
+                taskType, oldTask, newTask);
     }
 
-    public static void editEventNameMessage(String oldName, String newName, String eventType) {
+    public static void editTaskNameMessage(String oldName, String newName, String taskType) {
         System.out.printf("Your %s name was changed from |%s| to |%s|.\n",
-                eventType, oldName, newName);
+                taskType, oldName, newName);
 
     }
 
-    public static void editEventDateTimeMessage(String oldDateTime, String newDateTime, String eventType) {
+    public static void editTaskDateTimeMessage(String oldDateTime, String newDateTime, String taskType) {
         System.out.printf("Your %s date and time was changed from |%s| to |%s|.\n",
-                eventType, oldDateTime, newDateTime);
+                taskType, oldDateTime, newDateTime);
     }
 
-    public static void editEventVenueMessage(String oldVenue, String newVenue, String eventType) {
+    public static void editTaskVenueMessage(String oldVenue, String newVenue, String taskType) {
         System.out.printf("Your %s venue was changed from |%s| to |%s|.\n",
-                eventType, oldVenue, newVenue);
+                taskType, oldVenue, newVenue);
     }
 
-    public static void addEventMessage(String eventType, String eventName) {
+    public static void addTaskMessage(String taskType, String taskName) {
         System.out.printf("New %s: %s was added successfully to "
-                + "your Event list.\n", eventType, eventName);
+                + "your Task list.\n", taskType, taskName);
     }
 
     public static void addAttendanceMessage(String studentName, String eventName) {
@@ -167,9 +167,9 @@ public class UI {
                 + "successfully under event %s.\n", studentName, taskName);
     }
 
-    public static void deleteEventMessage(String eventType, String eventName) {
+    public static void deleteTaskMessage(String taskType, String taskName) {
         System.out.printf("%s: %s was deleted successfully from "
-                + "your Event list.\n", eventType, eventName);
+                + "your Task list.\n", taskType, taskName);
     }
 
 
