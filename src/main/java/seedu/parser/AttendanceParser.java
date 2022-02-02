@@ -1,47 +1,56 @@
 package seedu.parser;
 
 import seedu.attendance.Attendance;
-import seedu.performance.Performance;
-import seedu.ui.UI;
-
-import java.util.Arrays;
+import seedu.exception.PacException;
 
 public class AttendanceParser {
 
-    public static String[] attendanceDataToParse(String userInput) {
-        String[] instructions = userInput.split(" ",20);
-        return Arrays.copyOfRange(instructions, 1, instructions.length);
-    }
-
-    public Attendance parseAttendance(String commandParameters) {
+    /**
+     * This is the parser for Attendance. It gets the parameters from the user
+     * and parse them to studentName and status, and create a new Attendance
+     * with the two data. It then returns the Attendance created.
+     *
+     * @param commandParameters A String contains information of the Attendance, to be parsed.
+     * @return                  A Attendance containing information parsed from commandParameters.
+     * @throws PacException     Throws PacException when the commandParameters contains wrong
+     *                          tokens or insufficient parameter.
+     */
+    public Attendance parseAttendance(String commandParameters) throws PacException {
         String[] dataToRead = commandParameters.split(" ", 5);
-        String eventName = "";
         String studentName = "";
-        String description = "";
-        String hasAttended = "";
-        int r = 0;
-        for (String s : dataToRead) {
-            if (s != null) {
-                String[] data = s.split("/");
+        String status = "";
+        for (String token : dataToRead) {
+            if (token != null) {
+                String[] data = token.split("/");
+                if (data.length < 2) {
+                    throw new PacException("Insufficient parameter or wrong command.");
+                }
                 switch (data[0]) {
-                case "e":
-                    eventName = data[1];
-                    break;
                 case "n":
                     studentName = data[1];
                     break;
-                case "c":
-                    description = data[1];
-                    break;
                 case "p":
-                    hasAttended = data[1];
+                    status = data[1];
                     break;
                 default:
-                    UI.printWrongInput(s);
+                    throw new PacException("Wrong type of Attendance data token.");
                 }
             }
         }
-        Attendance attendance = new Attendance(eventName, studentName, description, hasAttended);
-        return attendance;
+        if (studentName.equals("") || status.equals("")) {
+            throw new PacException("Insufficient variables to be saved as Attendance");
+        }
+        return new Attendance(studentName, status);
+    }
+
+    public String getName(String commandParameters) throws PacException {
+        try {
+            String[] dataToRead = commandParameters.split(" ", 5);
+            String[] tokens = dataToRead[0].split("/");
+            String studentName = tokens[1];
+            return studentName;
+        } catch (Exception e) {
+            throw new PacException("Fail to add");
+        }
     }
 }

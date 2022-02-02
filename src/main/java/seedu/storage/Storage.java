@@ -1,131 +1,118 @@
 package seedu.storage;
 
-import seedu.event.Event;
-import seedu.exception.DukeException;
-import seedu.attendance.Attendance;
-import seedu.parser.ParserStorage;
+import seedu.student.StudentList;
+import seedu.student.StudentListCollection;
 import seedu.ui.UI;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
+import seedu.event.Event;
+import seedu.event.EventList;
+import seedu.exception.PacException;
 
 public class Storage {
-
-    private String filePath;
-    private ArrayList<Event> events;
-    private ArrayList<Attendance> attendances;
-    private UI ui;
+    protected FileIO fileIO;
 
     /**
-     * Constructs a Storage object that contains duke.tasks and duke.storage related operations.
-     * Mainly save duke.tasks and get duke.tasks.
-     *
-     * @param filePath The filepath to the txt file.
-     * @param ui The user interface displaying events on the task list.
+     * Creates a Storage object that saves to the specified directory.
+     * Note that an EventList object has to be passed for each relevant Storage function.
+     * @param directory the filepath to save to
+     * @throws PacException if cannot initialise filepath
      */
-    public Storage(String filePath, UI ui) {
-        this.filePath = filePath;
-        this.ui = ui;
-        readEvent();
-        readAttendance();
+    public Storage(String directory) throws PacException {
+        this.fileIO = new FileIO(directory);
     }
 
     /**
-     * Reads events.tasks from filepath. Creates empty duke.tasks if file cannot be read.
+     * Load all events to EventList.
+     * @return an EventList object with all events loaded
+     * @throws PacException if EOF is encountered
      */
-    private void readEvent() {
-        ArrayList<Event> newEvents = new ArrayList<>();
-        try {
-            File f = new File(filePath);
-            Scanner s = new Scanner(f);
+    public EventList loadEventList() throws PacException {
+        EventList eventList = new EventList();
+        String input = null;
+        do {
             try {
-                s = new Scanner(f);
-            } catch (java.io.FileNotFoundException e) {
-                e.printStackTrace();
+                input = fileIO.read();
+                Event newEvent = Event.parseStorable(input);
+                eventList.add(newEvent);
+            } catch (PacException m) {
+                if (m.getMessage().equals("FileIO: nothing to read anymore")) {
+                    break;
+                }
+            } catch (Exception m) {
+                UI.display("... Corrupted event found. Only previous events are loaded.");
+                return eventList;
             }
-            while (s.hasNext()) {
-                newEvents.add(ParserStorage.createTaskFromStorageEvent(s.nextLine()));
-            }
-            s.close();
-        } catch (DukeException | FileNotFoundException e) {
-            UI.display("FILE_NOT_FOUND");
-            UI.display("NEW_FILE_CREATED");
+        } while (!input.isBlank());
+
+        if (eventList.getSize() > 0) {
+            UI.display("... Loaded all events.");
         }
-        events = newEvents;
+
+        return eventList;
     }
 
     /**
-     * Reads attendances.tasks from filepath. Creates empty duke.tasks if file cannot be read.
+     * Save all events to Storage.
+     * @param eventList the list of events to be stored
+     * @throws PacException if IOException occurs
      */
-    private void readAttendance() {
-        ArrayList<Attendance> newAttendance = new ArrayList<>();
-        try {
-            File f = new File(filePath);
-            Scanner s = new Scanner(f);
+    public void saveEventList(EventList eventList) throws PacException {
+        for (Event event : eventList.list) {
+            fileIO.write(event.toStorable() + System.lineSeparator());
+        }
+
+        if (eventList.getSize() > 0) {
+            UI.display("All events are saved.");
+        }
+    }
+    
+    /**
+     * Load all studentLists to a StudentListCollection object.
+     * @return a StudentListCollection object with all studentLists loaded
+     */
+    public StudentListCollection loadStudentListCollection() {
+        StudentListCollection studentListCollection = new StudentListCollection();
+        String input = null;
+        do {
             try {
-                s = new Scanner(f);
-            } catch (java.io.FileNotFoundException e) {
-                e.printStackTrace();
+                input = fileIO.read();
+                StudentList newStudentList = StudentList.parseString(input);
+                studentListCollection.add(newStudentList);
+            } catch (PacException m) {
+                if (m.getMessage().equals("FileIO: nothing to read anymore")) {
+                    break;
+                }
+            } catch (Exception m) {
+                UI.display("... Corrupted student list found. Only previous student lists are loaded.");
+                return studentListCollection;
             }
-            while (s.hasNext()) {
-                newAttendance.add(ParserStorage.createTaskFromStorageAttendance(s.nextLine()));
-            }
-            s.close();
-        } catch (DukeException | FileNotFoundException e) {
-            UI.display("FILE_NOT_FOUND");
-            UI.display("NEW_FILE_CREATED");
+        } while (!input.isBlank());
+
+        if (studentListCollection.size() > 0) {
+            UI.display("... Loaded all student lists.");
         }
-        attendances = newAttendance;
+
+        return studentListCollection;
     }
 
     /**
-     * Writes the duke.events into a file of the given filepath.
+     * Save all studentLists to Storage.
+     * @param studentListCollection the list of studentlLsts to be stored
+     * @throws PacException if IOException occurs
      */
-    public void writeEvent() {
-        try {
-            FileWriter writer = new FileWriter(filePath);
-            for (Event event : events) {
-                writer.write(ParserStorage.toStorageStringEvent(event));
-            }
-            writer.close();
-        } catch (IOException e) {
-            UI.display("FILE_NOT_SAVE");
-        }
-    }
+    public void saveStudentListCollection(StudentListCollection studentListCollection) 
+        throws PacException {
+        fileIO.write(studentListCollection.toString());
 
-    /**
-     * Writes the duke.events into a file of the given filepath.
-     */
-    public void writeAttendance() {
-        try {
-            FileWriter writer = new FileWriter(filePath);
-            for (Attendance attendance : attendances) {
-                writer.write(ParserStorage.toStorageStringAttendance(attendance));
-            }
-            writer.close();
-        } catch (IOException e) {
-            UI.display("FILE_NOT_SAVE");
+        if (studentListCollection.size() > 0) {
+            UI.display("All student lists are saved.");
         }
     }
 
     /**
-     * Retrieves the existing events.
+     * Close every opened objects.
+     * @throws PacException if IOException occurs
      */
-    public ArrayList<Event> getEvents() {
-        return events;
+    public void close() throws PacException {
+        fileIO.close();
     }
-
-    /**
-     * Retrieves the existing attendances.
-     */
-    public ArrayList<Attendance> getAttendance() {
-        return attendances;
-    }
-
-
-
 }

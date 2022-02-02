@@ -7,25 +7,45 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AttendanceTest {
 
     @Test
-    void getModuleName() {
-        assertEquals("CS2040C", new Attendance("CS2040C","Richard", "Tutorial 1").getEvent());
-    }
-
-    @Test
     void getStudentName() {
-        assertEquals("Richard", new Attendance("CS2040C","Richard", "Tutorial 1").getStudent());
+        Attendance attendanceTestUnit = new Attendance("John Doe", "Y");
+        assertEquals("John Doe", attendanceTestUnit.getStudentName());
     }
 
     @Test
-    void getDescription() {
-        assertEquals("Tutorial 1", new Attendance("CS2040C","Richard", "Tutorial 1").getDescription());
+    void getStatus() {
+        Attendance attendanceTestUnit = new Attendance("John Doe", "Y");
+        assertEquals("Present", attendanceTestUnit.getStatus());
     }
 
     @Test
     void getAttendance() {
-        assertEquals("false", new Attendance("CS2040C","Richard", "Tutorial 1").getAttendance());
-        assertEquals("false", new Attendance("CS2040C","Richard", "Tutorial 1", "false").getAttendance());
-        assertEquals("true", new Attendance("CS2040C","Richard", "Tutorial 1", "true").getAttendance());
+        Attendance attendanceTestUnit = new Attendance("John Doe", "Y");
+        assertEquals("John Doe: Present", attendanceTestUnit.toString());
+    }
 
+    @Test
+    void setStatus() {
+        Attendance attendanceTestUnit = new Attendance("John Doe", "Y");
+        attendanceTestUnit.setStatus("N"); // Set status as absent
+        assertEquals("Absent", attendanceTestUnit.getStatus());
+        attendanceTestUnit.setStatus("Y"); // With upper case y
+        assertEquals("Present", attendanceTestUnit.getStatus());
+        attendanceTestUnit.setStatus("unknown"); // With unknown input
+        assertEquals("Absent", attendanceTestUnit.getStatus());
+        attendanceTestUnit.setStatus("y"); // With lower case y
+        assertEquals("Present", attendanceTestUnit.getStatus());
+        attendanceTestUnit.setStatus("      y     "); // With additional white spaces
+        assertEquals("Present", attendanceTestUnit.getStatus());
+    }
+
+    @Test
+    void setName() {
+        Attendance attendanceTestUnit = new Attendance("John Doe", "Y");
+        assertEquals("John Doe", attendanceTestUnit.getStudentName());
+        attendanceTestUnit.setName("David Chang"); // Set new name
+        assertEquals("David Chang", attendanceTestUnit.getStudentName());
+        attendanceTestUnit.setName(" Ryan   "); // Set new name with white spaces
+        assertEquals("Ryan", attendanceTestUnit.getStudentName());
     }
 }

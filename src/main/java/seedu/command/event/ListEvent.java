@@ -2,6 +2,7 @@ package seedu.command.event;
 
 import seedu.command.Command;
 import seedu.event.EventList;
+import seedu.exception.PacException;
 
 public class ListEvent extends Command {
     private EventList eventList;
@@ -11,9 +12,7 @@ public class ListEvent extends Command {
     }
 
     @Override
-    public void execute() {
-        for (int i = 0; i < eventList.getSize(); i++) {
-            eventList.find(i);
-        }
+    public void execute() throws PacException {
+        eventList.listEvent();
     }
 }
